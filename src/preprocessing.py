@@ -24,8 +24,15 @@ def add_lag_features(df, lags=[1, 7, 30]):
         df[f'lag_{lag}'] = df['demand'].shift(lag)
     return df
 
+def add_rolling_features(df, windows=[7, 30]):
+    for window in windows:
+        df[f'rolling_mean_{window}'] = df['demand'].rolling(window=window).mean()
+        df[f'rolling_std_{window}'] = df['demand'].rolling(window=window).std()
+    return df
+
 if __name__ == "__main__":
     df = load_data('data/demand_data.csv')
     df = add_date_features(df)
     df = add_lag_features(df)
+    df = add_rolling_features(df)
     save_processed_data(df, 'data/processed_demand_data.csv')
