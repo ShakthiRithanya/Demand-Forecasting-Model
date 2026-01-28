@@ -5,6 +5,14 @@ from datetime import datetime, timedelta
 def generate_demand_data(start_date, periods, freq='D'):
     """
     Generates synthetic demand data with seasonality, trend, and noise.
+
+    Args:
+        start_date (datetime): The starting date for the data.
+        periods (int): Number of time steps to generate.
+        freq (str): Frequency of the time series (default 'D' for daily).
+
+    Returns:
+        pd.DataFrame: A dataframe containing 'date' and 'demand' columns.
     """
     date_range = pd.date_range(start=start_date, periods=periods, freq=freq)
     
