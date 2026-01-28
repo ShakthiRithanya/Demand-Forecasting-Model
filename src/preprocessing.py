@@ -35,4 +35,8 @@ if __name__ == "__main__":
     df = add_date_features(df)
     df = add_lag_features(df)
     df = add_rolling_features(df)
+    
+    # Drop rows with NaN values (resulting from lags and rolling windows)
+    df.dropna(inplace=True)
+    
     save_processed_data(df, 'data/processed_demand_data.csv')
