@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
+from src.logger import logger
 
 def generate_demand_data(start_date, periods, freq='D'):
     """
@@ -45,6 +46,7 @@ def generate_demand_data(start_date, periods, freq='D'):
 
 if __name__ == "__main__":
     start_date = datetime(2023, 1, 1)
+    logger.info("Generating synthetic demand data...")
     df = generate_demand_data(start_date, 730) # 2 years of daily data
     df.to_csv('data/demand_data.csv', index=False)
-    print("Synthetic demand data generated and saved to data/demand_data.csv")
+    logger.info("Synthetic demand data saved to data/demand_data.csv")
