@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# Data
+data/*.csv
+data/*.xlsx
+
+# Notebooks
+.ipynb_checkpoints
+
+# IDE
+.vscode/
+.idea/
