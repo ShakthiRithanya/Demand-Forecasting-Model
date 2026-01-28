@@ -11,7 +11,7 @@ This project aims to build a robust demand forecasting model using various stati
 
 ## Roadmap
 
-1. [ ] Data Collection and Generation
+1. [x] Data Collection and Generation
 2. [ ] Exploratory Data Analysis (EDA)
 3. [ ] Feature Engineering
 4. [ ] Baseline Model Implementation
