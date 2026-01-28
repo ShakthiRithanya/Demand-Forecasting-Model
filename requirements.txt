@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+pandas
+numpy
+xgboost
+scikit-learn
+prophet
+torch
+joblib
+pydantic
+python-multipart
+psycopg2-binary
+redis
+python-dotenv
