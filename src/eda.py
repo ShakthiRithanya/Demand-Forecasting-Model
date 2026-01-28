@@ -2,6 +2,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import os
+import numpy as np
+from src.logger import logger
 
 def run_eda(file_path):
     df = pd.read_csv(file_path)
