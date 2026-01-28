@@ -8,6 +8,18 @@ def calculate_metrics(y_true, y_pred):
     rmse = np.sqrt(mse)
     return {'MSE': mse, 'MAE': mae, 'RMSE': rmse}
 
+from statsmodels.tsa.arima.model import ARIMA
+
+class ArimaModel:
+    def __init__(self, order=(5, 1, 0)):
+        self.order = order
+    
+    def fit_predict(self, train_data, test_data_len):
+        model = ARIMA(train_data, order=self.order)
+        model_fit = model.fit()
+        forecast = model_fit.forecast(steps=test_data_len)
+        return forecast
+
 class BaselineModel:
     def __init__(self, window=7):
         self.window = window
