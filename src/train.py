@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import os
 from src.models import BaselineModel, ArimaModel, calculate_metrics
 import joblib
 
@@ -43,3 +44,8 @@ if __name__ == "__main__":
     rf_pred = rf.predict(X_test)
     rf_metrics = calculate_metrics(y_test, rf_pred)
     print(f"Random Forest Metrics: {rf_metrics}")
+    
+    # Save the best model (using RF as example)
+    os.makedirs('models', exist_ok=True)
+    joblib.dump(rf.model, 'models/rf_model.joblib')
+    print("Best model saved to models/rf_model.joblib")
