@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from src.logger import logger
 
 def load_data(file_path):
     df = pd.read_csv(file_path)
@@ -9,7 +10,7 @@ def load_data(file_path):
 
 def save_processed_data(df, file_path):
     df.to_csv(file_path)
-    print(f"Processed data saved to {file_path}")
+    logger.info(f"Processed data saved to {file_path}")
 
 def add_date_features(df):
     df['day'] = df.index.day
@@ -31,6 +32,7 @@ def add_rolling_features(df, windows=[7, 30]):
     return df
 
 if __name__ == "__main__":
+    logger.info("Starting data preprocessing...")
     df = load_data('data/demand_data.csv')
     df = add_date_features(df)
     df = add_lag_features(df)
@@ -40,3 +42,4 @@ if __name__ == "__main__":
     df.dropna(inplace=True)
     
     save_processed_data(df, 'data/processed_demand_data.csv')
+    logger.info("Preprocessing complete.")
