@@ -16,4 +16,11 @@ def split_data(df, test_size=0.2):
 if __name__ == "__main__":
     df = load_processed_data('data/processed_demand_data.csv')
     train, test = split_data(df)
-    print(f"Data split into train ({len(train)}) and test ({len(test)}) sets.")
+    
+    # 1. Baseline Model
+    baseline = BaselineModel(window=7)
+    test_copy = test.copy()
+    test_copy['baseline_pred'] = baseline.predict(df).iloc[train.shape[0]:]
+    
+    baseline_metrics = calculate_metrics(test_copy['demand'], test_copy['baseline_pred'])
+    print(f"Baseline Metrics: {baseline_metrics}")
