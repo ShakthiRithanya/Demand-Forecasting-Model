@@ -11,6 +11,15 @@ def save_processed_data(df, file_path):
     df.to_csv(file_path)
     print(f"Processed data saved to {file_path}")
 
+def add_date_features(df):
+    df['day'] = df.index.day
+    df['month'] = df.index.month
+    df['year'] = df.index.year
+    df['dayofweek'] = df.index.dayofweek
+    df['is_weekend'] = df.index.dayofweek.isin([5, 6]).astype(int)
+    return df
+
 if __name__ == "__main__":
     df = load_data('data/demand_data.csv')
+    df = add_date_features(df)
     save_processed_data(df, 'data/processed_demand_data.csv')
