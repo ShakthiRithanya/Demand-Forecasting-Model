@@ -49,6 +49,6 @@ if __name__ == "__main__":
     print(f"Random Forest Metrics: {rf_metrics}")
     
     # Save the best model (using RF as example)
-    os.makedirs('models', exist_ok=True)
-    joblib.dump(rf.model, 'models/rf_model.joblib')
-    print("Best model saved to models/rf_model.joblib")
+    os.makedirs(os.path.dirname(MODEL_SAVE_PATH), exist_ok=True)
+    joblib.dump(rf.model, MODEL_SAVE_PATH)
+    print(f"Best model saved to {MODEL_SAVE_PATH}")
