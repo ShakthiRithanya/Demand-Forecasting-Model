@@ -4,8 +4,6 @@ matplotlib
 seaborn
 scikit-learn
 statsmodels
-tensorflow
 joblib
 flask
 plotly
-pandas-datareader
