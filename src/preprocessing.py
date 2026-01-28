@@ -19,7 +19,13 @@ def add_date_features(df):
     df['is_weekend'] = df.index.dayofweek.isin([5, 6]).astype(int)
     return df
 
+def add_lag_features(df, lags=[1, 7, 30]):
+    for lag in lags:
+        df[f'lag_{lag}'] = df['demand'].shift(lag)
+    return df
+
 if __name__ == "__main__":
     df = load_data('data/demand_data.csv')
     df = add_date_features(df)
+    df = add_lag_features(df)
     save_processed_data(df, 'data/processed_demand_data.csv')
