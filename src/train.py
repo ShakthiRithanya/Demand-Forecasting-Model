@@ -30,3 +30,16 @@ if __name__ == "__main__":
     arima_pred = arima.fit_predict(train['demand'], len(test))
     arima_metrics = calculate_metrics(test['demand'], arima_pred)
     print(f"ARIMA Metrics: {arima_metrics}")
+
+    # 3. Random Forest Model
+    from src.models import RandomForestForecaster
+    X_train = train.drop(columns=['demand'])
+    y_train = train['demand']
+    X_test = test.drop(columns=['demand'])
+    y_test = test['demand']
+    
+    rf = RandomForestForecaster()
+    rf.fit(X_train, y_train)
+    rf_pred = rf.predict(X_test)
+    rf_metrics = calculate_metrics(y_test, rf_pred)
+    print(f"Random Forest Metrics: {rf_metrics}")
