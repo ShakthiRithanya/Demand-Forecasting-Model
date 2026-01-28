@@ -37,7 +37,15 @@ def run_eda(file_path):
     plt.title('Day of Week Demand Distribution')
     plt.savefig('notebooks/daily_demand.png')
     
-    print("EDA completed. Visualizations saved to notebooks/ folder.")
+    # 5. Correlation Heatmap
+    plt.figure(figsize=(12, 10))
+    # Filter only numeric columns
+    numeric_df = df.select_dtypes(include=[np.number])
+    sns.heatmap(numeric_df.corr(), annot=True, cmap='coolwarm', fmt=".2f")
+    plt.title('Feature Correlation Heatmap')
+    plt.savefig('notebooks/correlation_heatmap.png')
+    
+    logger.info("EDA completed. Visualizations saved to notebooks/ folder.")
 
 if __name__ == "__main__":
     run_eda('data/demand_data.csv')
