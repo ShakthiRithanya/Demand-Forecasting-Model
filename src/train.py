@@ -3,6 +3,7 @@ import numpy as np
 import os
 from src.models import BaselineModel, ArimaModel, calculate_metrics
 import joblib
+from src.config import DATA_PATH, PROCESSED_DATA_PATH, MODEL_SAVE_PATH, TEST_SIZE
 
 def load_processed_data(file_path):
     df = pd.read_csv(file_path, index_col='date', parse_dates=True)
