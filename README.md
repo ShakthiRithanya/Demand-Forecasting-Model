@@ -12,8 +12,8 @@ This project aims to build a robust demand forecasting model using various stati
 ## Roadmap
 
 1. [x] Data Collection and Generation
-2. [ ] Exploratory Data Analysis (EDA)
-3. [ ] Feature Engineering
+2. [x] Exploratory Data Analysis (EDA)
+3. [x] Feature Engineering
 4. [ ] Baseline Model Implementation
 5. [ ] Advanced Statistical Models (ARIMA, SARIMA)
 6. [ ] Machine Learning Models (Random Forest, XGBoost)
