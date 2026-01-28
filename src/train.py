@@ -24,3 +24,9 @@ if __name__ == "__main__":
     
     baseline_metrics = calculate_metrics(test_copy['demand'], test_copy['baseline_pred'])
     print(f"Baseline Metrics: {baseline_metrics}")
+
+    # 2. ARIMA Model
+    arima = ArimaModel()
+    arima_pred = arima.fit_predict(train['demand'], len(test))
+    arima_metrics = calculate_metrics(test['demand'], arima_pred)
+    print(f"ARIMA Metrics: {arima_metrics}")
