@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +14,7 @@
             --text: #f8fafc;
             --text-dim: #94a3b8;
         }
+
         body {
             background-color: var(--bg);
             color: var(--text);
@@ -20,14 +22,17 @@
             margin: 0;
             padding: 2rem;
         }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
         }
+
         header {
             margin-bottom: 2rem;
             text-align: center;
         }
+
         h1 {
             font-size: 2.5rem;
             background: linear-gradient(to right, #818cf8, #6366f1);
@@ -35,31 +40,36 @@
             -webkit-text-fill-color: transparent;
             margin-bottom: 0.5rem;
         }
+
         .dashboard-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
         }
+
         .card {
-            background: var(--card-bg);
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
             border-radius: 1rem;
             padding: 1.5rem;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
+
         #demand-chart {
             height: 500px;
             width: 100%;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <header>
             <h1>Demand Forecasting Dashboard</h1>
             <p style="color: var(--text-dim)">Visualizing historical demand and future projections</p>
         </header>
-        
+
         <div class="card">
             <div id="demand-chart"></div>
         </div>
@@ -71,7 +81,7 @@
             .then(data => {
                 const dates = data.map(d => d.date);
                 const demand = data.map(d => d.demand);
-                
+
                 const trace = {
                     x: dates,
                     y: demand,
@@ -81,7 +91,7 @@
                     line: { color: '#6366f1', width: 3 },
                     marker: { color: '#818cf8', size: 6 }
                 };
-                
+
                 const layout = {
                     paper_bgcolor: 'rgba(0,0,0,0)',
                     plot_bgcolor: 'rgba(0,0,0,0)',
@@ -90,9 +100,10 @@
                     yaxis: { gridcolor: 'rgba(255,255,255,0.1)' },
                     margin: { t: 20, r: 20, b: 40, l: 40 }
                 };
-                
+
                 Plotly.newPlot('demand-chart', [trace], layout);
             });
     </script>
 </body>
+
 </html>
