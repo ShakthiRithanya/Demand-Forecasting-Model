@@ -21,6 +21,18 @@ class RandomForestForecaster:
     
     def predict(self, X):
         return self.model.predict(X)
+    
+    def tune(self, X, y):
+        from sklearn.model_selection import GridSearchCV
+        param_grid = {
+            'n_estimators': [50, 100, 200],
+            'max_depth': [None, 10, 20],
+            'min_samples_split': [2, 5]
+        }
+        grid_search = GridSearchCV(self.model, param_grid, cv=3, scoring='neg_mean_squared_error')
+        grid_search.fit(X, y)
+        self.model = grid_search.best_estimator_
+        print(f"Best parameters: {grid_search.best_params_}")
 
 class ArimaModel:
     def __init__(self, order=(5, 1, 0)):
