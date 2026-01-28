@@ -4,6 +4,7 @@ import os
 from src.models import BaselineModel, ArimaModel, calculate_metrics
 import joblib
 from src.config import DATA_PATH, PROCESSED_DATA_PATH, MODEL_SAVE_PATH, TEST_SIZE
+from src.logger import logger
 
 def load_processed_data(file_path):
     df = pd.read_csv(file_path, index_col='date', parse_dates=True)
@@ -16,8 +17,10 @@ def split_data(df, test_size=0.2):
     return train, test
 
 if __name__ == "__main__":
+    logger.info("Initializing model training process...")
     df = load_processed_data(PROCESSED_DATA_PATH)
     train, test = split_data(df, test_size=TEST_SIZE)
+    logger.info(f"Data split into train ({len(train)}) and test ({len(test)}) sets.")
     
     # 1. Baseline Model
     baseline = BaselineModel(window=7)
@@ -46,9 +49,9 @@ if __name__ == "__main__":
     rf.fit(X_train, y_train)
     rf_pred = rf.predict(X_test)
     rf_metrics = calculate_metrics(y_test, rf_pred)
-    print(f"Random Forest Metrics: {rf_metrics}")
+    logger.info(f"Random Forest Metrics: {rf_metrics}")
     
     # Save the best model (using RF as example)
     os.makedirs(os.path.dirname(MODEL_SAVE_PATH), exist_ok=True)
     joblib.dump(rf.model, MODEL_SAVE_PATH)
-    print(f"Best model saved to {MODEL_SAVE_PATH}")
+    logger.info(f"Best model saved to {MODEL_SAVE_PATH}")
