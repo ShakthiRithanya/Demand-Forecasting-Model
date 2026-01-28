@@ -16,13 +16,15 @@ def split_data(df, test_size=0.2):
     return train, test
 
 if __name__ == "__main__":
-    df = load_processed_data('data/processed_demand_data.csv')
-    train, test = split_data(df)
+    df = load_processed_data(PROCESSED_DATA_PATH)
+    train, test = split_data(df, test_size=TEST_SIZE)
     
     # 1. Baseline Model
     baseline = BaselineModel(window=7)
     test_copy = test.copy()
-    test_copy['baseline_pred'] = baseline.predict(df).iloc[train.shape[0]:]
+    # Need to load original data for baseline if it needs lookback beyond test set
+    full_df = pd.read_csv(DATA_PATH, index_col='date', parse_dates=True)
+    test_copy['baseline_pred'] = baseline.predict(full_df).iloc[-len(test):]
     
     baseline_metrics = calculate_metrics(test_copy['demand'], test_copy['baseline_pred'])
     print(f"Baseline Metrics: {baseline_metrics}")
