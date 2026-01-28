@@ -20,6 +20,13 @@ def add_date_features(df):
     df['is_weekend'] = df.index.dayofweek.isin([5, 6]).astype(int)
     return df
 
+def add_cyclic_features(df):
+    df['day_sin'] = np.sin(2 * np.pi * df.index.day / 31)
+    df['day_cos'] = np.cos(2 * np.pi * df.index.day / 31)
+    df['month_sin'] = np.sin(2 * np.pi * df.index.month / 12)
+    df['month_cos'] = np.cos(2 * np.pi * df.index.month / 12)
+    return df
+
 def add_lag_features(df, lags=[1, 7, 30]):
     for lag in lags:
         df[f'lag_{lag}'] = df['demand'].shift(lag)
@@ -35,6 +42,7 @@ if __name__ == "__main__":
     logger.info("Starting data preprocessing...")
     df = load_data('data/demand_data.csv')
     df = add_date_features(df)
+    df = add_cyclic_features(df)
     df = add_lag_features(df)
     df = add_rolling_features(df)
     
