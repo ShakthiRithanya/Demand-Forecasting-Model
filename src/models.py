@@ -10,6 +10,18 @@ def calculate_metrics(y_true, y_pred):
 
 from statsmodels.tsa.arima.model import ARIMA
 
+from sklearn.ensemble import RandomForestRegressor
+
+class RandomForestForecaster:
+    def __init__(self, n_estimators=100):
+        self.model = RandomForestRegressor(n_estimators=n_estimators)
+    
+    def fit(self, X, y):
+        self.model.fit(X, y)
+    
+    def predict(self, X):
+        return self.model.predict(X)
+
 class ArimaModel:
     def __init__(self, order=(5, 1, 0)):
         self.order = order
